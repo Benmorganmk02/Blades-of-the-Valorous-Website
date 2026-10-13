@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background: #07060d;
+    color-scheme: dark;
+  }
+  body {
+    @apply font-body text-silver-200 bg-void antialiased;
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-silver-100;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+  ::selection {
+    background: rgba(124, 92, 214, 0.45);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid #a68cf0;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Polished-silver gradient text for titles */
+  .text-silver-sheen {
+    background: linear-gradient(180deg, #ffffff 0%, #dfe2ea 40%, #9aa0b0 75%, #dfe2ea 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .panel {
+    @apply rounded-xl border border-silver-500/20 bg-night/70 backdrop-blur-sm;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-md px-6 py-3 font-display text-sm font-semibold uppercase tracking-[0.15em] text-white transition;
+    background: linear-gradient(180deg, #7c5cd6 0%, #5a3399 100%);
+    box-shadow: 0 0 0 1px rgba(166, 140, 240, 0.5), 0 8px 30px -8px rgba(124, 92, 214, 0.7);
+  }
+  .btn-primary:hover {
+    filter: brightness(1.12);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-md border border-silver-400/40 px-6 py-3 font-display text-sm font-semibold uppercase tracking-[0.15em] text-silver-100 transition hover:border-silver-200 hover:bg-white/5;
+  }
+  .eyebrow {
+    @apply font-display text-xs font-semibold uppercase tracking-[0.3em] text-royal-300;
+  }
+  .divider {
+    @apply flex items-center gap-4 text-silver-500;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    @apply h-px flex-1;
+    background: linear-gradient(90deg, transparent, rgba(195, 200, 212, 0.35), transparent);
+  }
+  .prose-rules p { @apply mb-4; }
+  .prose-rules strong { @apply font-semibold text-silver-100; }
+  .prose-rules ul { @apply mb-4 list-disc space-y-1 pl-6 marker:text-royal-400; }
+  .data-table { @apply w-full border-collapse text-left text-base; }
+  .data-table th { @apply border-b border-silver-500/30 px-3 py-2 font-display text-xs uppercase tracking-widest text-silver-400; }
+  .data-table td { @apply border-b border-silver-500/10 px-3 py-2 align-top; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
