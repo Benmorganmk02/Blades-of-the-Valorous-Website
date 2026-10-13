@@ -86,6 +86,9 @@ export default function Layout() {
             ))}
             {APP_URL && <a href={APP_URL} target="_blank" rel="noreferrer" className="hover:text-silver-100">Launch App</a>}
           </div>
+          <p className="text-base text-silver-400">
+            Contact: <a href="mailto:contact@bladesofthevalorous.com" className="text-silver-300 underline-offset-4 hover:text-silver-100 hover:underline">contact@bladesofthevalorous.com</a>
+          </p>
           <p className="text-sm text-silver-500">© {new Date().getFullYear()} Blades of the Valorous. A tabletop roleplaying game.</p>
         </div>
       </footer>
