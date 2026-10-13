@@ -20,7 +20,7 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
-        <Crest className="h-40 w-32 drop-shadow-[0_0_30px_rgba(124,92,214,0.6)] sm:h-52 sm:w-40" />
+        <Crest className="h-56 w-56 drop-shadow-[0_0_40px_rgba(124,92,214,0.55)] sm:h-72 sm:w-72" />
         <p className="eyebrow mt-8">A tabletop roleplaying game</p>
         <h1 className="text-silver-sheen mt-4 font-deco text-5xl leading-tight sm:text-7xl">
           Blades of the<br />Valorous

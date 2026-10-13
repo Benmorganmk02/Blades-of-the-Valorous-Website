@@ -21,7 +21,7 @@ export default function Layout() {
       <header className="sticky top-0 z-30 border-b border-silver-500/15 bg-void/70 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2.5">
-            <Crest className="h-9 w-7" />
+            <Crest className="h-11 w-11" />
             <span className="font-display text-base font-semibold uppercase tracking-[0.18em] text-silver-100 sm:text-lg">
               Blades <span className="text-royal-300">of the</span> Valorous
             </span>
@@ -78,7 +78,7 @@ export default function Layout() {
 
       <footer className="mt-24 border-t border-silver-500/15 bg-void/80">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-10 text-center sm:px-6">
-          <Crest className="h-12 w-9 opacity-80" />
+          <Crest className="h-20 w-20 opacity-90" />
           <p className="font-display text-sm uppercase tracking-[0.25em] text-silver-300">Blades of the Valorous</p>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base text-silver-400">
             {NAV_LINKS.map(l => (
