@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { BookOpen, Feather, ScrollText, Hammer, Dices, Shield, Sparkles } from 'lucide-react';
 import Crest from '../components/Crest';
+import ElementalAura from '../components/ElementalAura';
 
 const SECTIONS = [
   { to: '/rules', icon: BookOpen, title: 'Rules', text: 'Dice pools, attributes, armor and the injury ladder. The full reference for players and game masters.' },
@@ -19,9 +20,15 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6">
-        <Crest className="h-56 w-56 drop-shadow-[0_0_40px_rgba(124,92,214,0.55)] sm:h-72 sm:w-72" />
-        <p className="eyebrow mt-8">A tabletop roleplaying game</p>
+      <section className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-5xl flex-col items-center justify-center overflow-x-clip px-4 pb-20 pt-32 text-center sm:pt-40 sm:px-6">
+        <div className="relative h-56 w-56 sm:h-72 sm:w-72">
+          <ElementalAura className="pointer-events-none absolute -inset-16 h-[calc(100%+8rem)] w-[calc(100%+8rem)] sm:-inset-28 sm:h-[calc(100%+14rem)] sm:w-[calc(100%+14rem)]" />
+          <div className="emblem-float relative h-full w-full">
+            <Crest className="emblem-glow h-full w-full" />
+            <div aria-hidden className="emblem-gleam absolute inset-0" />
+          </div>
+        </div>
+        <p className="eyebrow mt-20 sm:mt-28">A tabletop roleplaying game</p>
         <h1 className="text-silver-sheen mt-4 font-deco text-5xl leading-tight sm:text-7xl">
           Blades of the<br />Valorous
         </h1>
