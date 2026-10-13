@@ -4,7 +4,7 @@ import Crest from '../components/Crest';
 
 const SECTIONS = [
   { to: '/rules', icon: BookOpen, title: 'Rules', text: 'Dice pools, attributes, armor and the injury ladder. The full reference for players and game masters.' },
-  { to: '/lore', icon: Feather, title: 'Lore', text: 'The world, its peoples, its orders and the ages that shaped them.' },
+  { to: '/lore', icon: Feather, title: 'Lore', text: 'Explore the worlds of the game, starting with Aetherastra, whose story runs from the age of blades to the age of stars.' },
   { to: '/character-sheets', icon: ScrollText, title: 'Character Sheets', text: 'Everything a hero carries, from stats and skills to gear, wounds and loadouts.' },
   { to: '/builder', icon: Hammer, title: 'Character Builder', text: 'Forge a new character step by step, from first point spent to first blade drawn.' },
 ];

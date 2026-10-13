@@ -10,8 +10,14 @@ All rules and lore live as plain text files in the **`content/`** folder:
 
 ```
 content/
-  rules/   ← one file per section of the Rules page
-  lore/    ← one file per Lore chapter
+  rules/                 ← one file per section of the Rules page
+  lore/
+    aetherastra/         ← one folder per world
+      _world.md          ← the world itself: name, tagline, intro
+      01-overview.md     ← one file per chapter of that world
+      02-the-medieval-age.md
+    world-two/
+      _world.md
 ```
 
 Edit them right on GitHub: open the file, click the ✏️ pencil, make your changes, then **Commit changes**.
@@ -21,10 +27,10 @@ The live site updates by itself about a minute later.
 
 ```markdown
 ---
-title: The World
-order: 1
-icon: globe
-summary: The lands, seas and skies where your tales unfold.
+title: The Medieval Age
+order: 2
+icon: castle
+summary: Steel, sorcery and kingdoms: the age where the story begins.
 ---
 
 ## The Northern Reaches
@@ -38,16 +44,28 @@ The part between the `---` lines is the **header**:
 | ---------- | ----------------------------------------------------------------------- |
 | `title`    | The heading shown on the site                                           |
 | `order`    | Sort position (1 comes first)                                           |
-| `summary`  | *(Lore only)* the one-line teaser on the Lore page                      |
+| `summary`  | *(Lore only)* the short teaser shown on the card                        |
 | `icon`     | *(Lore only)* one of: globe, users, crown, hourglass, book, castle, flame, map, moon, scroll, shield, skull, sparkles, swords |
+| `tagline`  | *(`_world.md` only)* a one-line motto under the world name               |
+| `primary`  | *(`_world.md` only)* `true` makes it the big featured world at the top   |
 
 A lore chapter with nothing below the header shows as **"Coming soon"**. Once it has text, it becomes a readable page.
+Text written below the header of a `_world.md` appears as an introduction on that world's page.
 
-### Adding a new section or chapter
+### Adding a new rules section or lore chapter
 
-Create a new file in `content/rules/` or `content/lore/` (GitHub: **Add file → Create new file**), named like
-`05-the-sunken-kingdom.md`. Copy the header from another file and change it. The filename becomes the web address,
-for example `/lore/the-sunken-kingdom`.
+Create a new file in `content/rules/` or in a world's folder (GitHub: **Add file → Create new file**), named like
+`07-the-sunken-kingdom.md`. Copy the header from another file and change it. The filename becomes the web address,
+for example `/lore/aetherastra/the-sunken-kingdom`.
+
+### Adding or naming a world
+
+Each world is a folder in `content/lore/` with a `_world.md` inside. To add a world, create
+`content/lore/<name>/_world.md` (on GitHub, typing `<name>/_world.md` as the filename creates the folder).
+The folder name becomes the web address (`/lore/<name>`).
+
+The three placeholder worlds (`world-two`, `world-three`, `world-four`) only need their `title` changed to be named.
+To change their web address too, rename the folder (GitHub: open `_world.md`, ✏️, and edit the path above the editor).
 
 ### Formatting cheat-sheet
 
