@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Animated magic behind the home-page emblem: red flames licking up the left,
- * blue frost drifting off the right, purple lightning crackling over the top.
+ * Animated magic behind the home-page emblem: red flames rising straight up
+ * from the top, blue frost drifting off the right, purple lightning crackling
+ * out of the left.
  * Everything starts just inside the shield's outline (the canvas sits beneath
  * the emblem), so it reads as pouring out from behind the shield.
  * Pauses when scrolled out of view; draws a single still frame for visitors
@@ -12,7 +13,7 @@ import { useEffect, useRef } from 'react';
 type RGB = [number, number, number];
 
 interface Spark { x: number; y: number; vx: number; vy: number; life: number; max: number; size: number; seed: number }
-interface Tongue { ang: number; phase: number; speed: number; len: number; width: number }
+interface Tongue { ox: number; phase: number; speed: number; len: number; width: number }
 interface Flake { x: number; y: number; vx: number; vy: number; rot: number; vr: number; life: number; max: number; size: number }
 interface Mist { x: number; y: number; vx: number; vy: number; life: number; max: number; size: number }
 interface Bolt { paths: [number, number][][]; life: number; max: number }
@@ -64,14 +65,16 @@ function drawTongue(
   len: number, width: number, sway: number, swayPhase: number, colors: [string, string, string],
 ) {
   const px = -dy, py = dx; // perpendicular to the rise direction
-  const N = 14;
+  const N = 30;
   const left: [number, number][] = [];
   const right: [number, number][] = [];
   for (let i = 0; i <= N; i++) {
     const s = i / N;
-    const off = Math.sin(swayPhase - s * 3.2) * sway * s * s;
+    // a slow S-curve plus a faster ripple travelling up the flame; the tip whips the most
+    const off = (Math.sin(swayPhase - s * 2.6) + 0.35 * Math.sin(swayPhase * 2.3 - s * 6)) * sway * s * s;
     const cx = bx + dx * len * s + px * off, cy = by + dy * len * s + py * off;
-    const w = width * Math.pow(1 - s, 0.9) * (0.75 + 0.25 * Math.sin(s * Math.PI));
+    // teardrop: full near the base, long smooth taper to a fine point
+    const w = width * Math.pow(1 - s, 1.4) * (0.55 + 2 * s);
     left.push([cx + px * w, cy + py * w]);
     right.push([cx - px * w, cy - py * w]);
   }
@@ -116,13 +119,10 @@ export default function ElementalAura({ className = '' }: { className?: string }
     const flakes: Flake[] = [];
     const mists: Mist[] = [];
     const bolts: Bolt[] = [];
-    const tongues: Tongue[] = Array.from({ length: 12 }, (_, i) => ({
-      ang: 120 + (i / 11) * 100 + rand(-4, 4), // lower-left, round the left edge, to upper-left
-      phase: rand(0, 6.28),
-      speed: rand(0.07, 0.12),
-      len: rand(0.17, 0.27),
-      width: rand(0.032, 0.048),
-    }));
+    // four distinct tongues side by side behind the top of the shield; the middle pair burn tallest
+    const tongues: Tongue[] = [
+      { ox: -0.075, len: 0.26 }, { ox: -0.025, len: 0.37 }, { ox: 0.027, len: 0.34 }, { ox: 0.078, len: 0.25 },
+    ].map(tg => ({ ...tg, phase: rand(0, 6.28), speed: rand(0.06, 0.09), width: rand(0.022, 0.027) }));
     let nextBolt = 40;
     let flash = 0;
     let t = 0;
@@ -144,9 +144,10 @@ export default function ElementalAura({ className = '' }: { className?: string }
 
     // ── Spawners ────────────────────────────────────────────────────────────
     const spawnSpark = () => {
-      const [x, y] = rim(rand(110, 225), rand(1.1, 1.6)); // thrown off the flame tips
+      // thrown off the flame tips
+      const x = S / 2 + rand(-0.06, 0.06) * S, y = S / 2 - RIM_Y * S - rand(0.15, 0.3) * S;
       const max = rand(40, 80);
-      sparks.push({ x, y, vx: rand(-0.5, 0.1) * k, vy: rand(-1.6, -0.7) * k, life: 0, max, size: rand(3, 7) * k, seed: rand(0, 6.28) });
+      sparks.push({ x, y, vx: rand(-0.25, 0.25) * k, vy: rand(-1.6, -0.7) * k, life: 0, max, size: rand(3, 7) * k, seed: rand(0, 6.28) });
     };
     const spawnFlake = () => {
       const [x, y] = rim(rand(-50, 65), rand(0.85, 1.05));
@@ -159,9 +160,9 @@ export default function ElementalAura({ className = '' }: { className?: string }
       mists.push({ x, y, vx: rand(0.1, 0.3) * k, vy: rand(-0.2, 0.2) * k, life: 0, max, size: rand(40, 70) * k });
     };
     const spawnBolt = () => {
-      const ang = rand(-150, -30);
-      const start = rim(ang, 0.85); // from behind the top of the shield
-      const end = rim(ang + rand(-25, 25), rand(1.8, 2.2));
+      const ang = rand(145, 215);
+      const start = rim(ang, 0.85); // from behind the left edge of the shield
+      const end = rim(ang + rand(-20, 20), rand(2.1, 2.6));
       const main = boltPath(start[0], start[1], end[0], end[1], 26 * k, 6);
       const paths = [main];
       const branches = Math.floor(rand(1, 4));
@@ -179,7 +180,7 @@ export default function ElementalAura({ className = '' }: { className?: string }
     // ── Update & draw ───────────────────────────────────────────────────────
     const step = (f: number) => {
       t += f;
-      if (sparks.length < 45 && Math.random() < 0.8 * f) spawnSpark();
+      if (sparks.length < 18 && Math.random() < 0.3 * f) spawnSpark();
       if (flakes.length < 60 && Math.random() < 0.6 * f) spawnFlake();
       if (mists.length < 14 && Math.random() < 0.1 * f) spawnMist();
       nextBolt -= f;
@@ -218,9 +219,9 @@ export default function ElementalAura({ className = '' }: { className?: string }
       const pulse = 0.5 + 0.5 * Math.sin(t * 0.03);
 
       // Ambient elemental glows, hugging the shield
-      const [fx, fy] = rim(165, 1.1);
+      const [fx, fy] = rim(-90, 1.25);
       const [ix, iy] = rim(10, 1.1);
-      const [lx, ly] = rim(-90, 1);
+      const [lx, ly] = rim(180, 1.3);
       stamp(glow.fire, fx, fy, S * 0.55, 0.32 + 0.1 * pulse);
       stamp(glow.frost, ix, iy, S * 0.55, 0.3 + 0.1 * (1 - pulse));
       stamp(glow.purple, lx, ly, S * 0.55, 0.28 + 0.4 * flash);
@@ -252,23 +253,25 @@ export default function ElementalAura({ className = '' }: { className?: string }
         ctx.stroke();
       }
 
-      // Fire: flame tongues licking up from behind the left edge, layered red → orange → yellow core
+      // Fire: tongues rising straight up from behind the top of the shield, layered red → orange → yellow core
+      const baseY = S / 2 - RIM_Y * S * 0.7;
       for (const tg of tongues) {
-        const [bx, by] = rim(tg.ang, 0.9);
-        const a = (tg.ang * Math.PI) / 180;
-        // rise upward, leaning well out from the shield so the tongues clear its edge
-        let dx = Math.cos(a) * 0.95, dy = Math.sin(a) * 0.3 - 1;
+        const bx = S / 2 + tg.ox * S;
+        let dx = tg.ox * 2.2, dy = -1; // fan out slightly so the tongues stay distinct
         const dl = Math.hypot(dx, dy);
         dx /= dl; dy /= dl;
-        const flick = 0.62 + 0.28 * Math.sin(t * tg.speed + tg.phase) + 0.14 * Math.sin(t * tg.speed * 2.7 + tg.phase * 1.9);
+        const flick = 0.78 + 0.16 * Math.sin(t * tg.speed + tg.phase) + 0.08 * Math.sin(t * tg.speed * 2.9 + tg.phase * 1.7);
         const len = tg.len * S * flick, w = tg.width * S;
-        const sp = t * tg.speed * 1.6 + tg.phase;
-        ctx.globalAlpha = 0.55;
-        drawTongue(ctx, bx, by, dx, dy, len * 1.15, w * 1.35, 9 * k, sp, ['rgba(255,60,20,0.9)', 'rgba(200,25,10,0.5)', 'rgba(120,0,0,0)']);
-        ctx.globalAlpha = 0.7;
-        drawTongue(ctx, bx, by, dx, dy, len * 0.85, w, 7 * k, sp + 0.4, ['rgba(255,150,40,0.95)', 'rgba(255,80,20,0.55)', 'rgba(255,40,0,0)']);
-        ctx.globalAlpha = 0.8;
-        drawTongue(ctx, bx, by, dx, dy, len * 0.5, w * 0.55, 4 * k, sp + 0.8, ['rgba(255,240,180,1)', 'rgba(255,200,80,0.6)', 'rgba(255,140,40,0)']);
+        const sp = t * tg.speed * 1.5 + tg.phase;
+        ctx.shadowColor = 'rgba(255,90,20,0.8)';
+        ctx.shadowBlur = 8 * k;
+        ctx.globalAlpha = 0.6;
+        drawTongue(ctx, bx, baseY, dx, dy, len, w * 1.3, 12 * k, sp, ['rgba(255,60,20,0.95)', 'rgba(210,30,10,0.55)', 'rgba(120,0,0,0)']);
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 0.75;
+        drawTongue(ctx, bx, baseY, dx, dy, len * 0.75, w * 0.9, 9 * k, sp + 0.25, ['rgba(255,160,50,1)', 'rgba(255,90,20,0.6)', 'rgba(255,40,0,0)']);
+        ctx.globalAlpha = 0.85;
+        drawTongue(ctx, bx, baseY, dx, dy, len * 0.45, w * 0.5, 5 * k, sp + 0.5, ['rgba(255,245,200,1)', 'rgba(255,205,90,0.7)', 'rgba(255,150,40,0)']);
       }
       for (const e of sparks) {
         const p = e.life / e.max;
