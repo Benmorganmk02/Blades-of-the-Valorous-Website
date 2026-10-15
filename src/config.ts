@@ -1,8 +1,8 @@
 /**
- * Link to the character-sheet / builder app. Leave empty until it's ready —
- * every "Launch" button on the site shows "Coming soon" while this is blank.
+ * Link to the character-sheet / builder app. Every "Launch" button on the site
+ * opens this; if it's ever emptied, they show a disabled "Coming soon" instead.
  */
-export const APP_URL = '';
+export const APP_URL = 'https://bot-f-generic-app.vercel.app';
 
 export const NAV_LINKS = [
   { to: '/rules', label: 'Rules' },
