@@ -16,7 +16,7 @@ content/
       _world.md          ← the world itself: name, tagline, intro
       01-overview.md     ← one file per chapter of that world
       02-the-medieval-age.md
-    world-two/
+    malconia/
       _world.md
 ```
 
@@ -64,7 +64,7 @@ Each world is a folder in `content/lore/` with a `_world.md` inside. To add a wo
 `content/lore/<name>/_world.md` (on GitHub, typing `<name>/_world.md` as the filename creates the folder).
 The folder name becomes the web address (`/lore/<name>`).
 
-The three placeholder worlds (`world-two`, `world-three`, `world-four`) only need their `title` changed to be named.
+The placeholder worlds (`world-three`, `world-four`) only need their `title` changed to be named.
 To change their web address too, rename the folder (GitHub: open `_world.md`, ✏️, and edit the path above the editor).
 
 ### Formatting cheat-sheet
