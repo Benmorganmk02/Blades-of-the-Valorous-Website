@@ -1,6 +1,6 @@
 ---
 title: Peoples
-order: 5
+order: 2
 icon: users
 summary: The races and cultures of Aetherastra.
 ---

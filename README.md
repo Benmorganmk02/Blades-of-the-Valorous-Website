@@ -10,12 +10,14 @@ All rules and lore live as plain text files in the **`content/`** folder:
 
 ```
 content/
-  rules/                 ← one file per section of the Rules page
+  rules/                       ← one file per section of the Rules page
   lore/
-    aetherastra/         ← one folder per world
-      _world.md          ← the world itself: name, tagline, intro
-      01-overview.md     ← one file per chapter of that world
-      02-the-medieval-age.md
+    aetherastra/               ← one folder per world
+      _world.md                ← the world itself: name, tagline, intro
+      01-overview.md           ← general chapters (shown under "Compendium")
+      1-the-age-of-myth/       ← one folder per time period (Aeontide)
+        _period.md             ← the period itself: name, "The First Aeontide", summary
+        01-the-creation.md     ← one file per section of that period
     malconia/
       _world.md
 ```
@@ -57,6 +59,17 @@ Text written below the header of a `_world.md` appears as an introduction on tha
 Create a new file in `content/rules/` or in a world's folder (GitHub: **Add file → Create new file**), named like
 `07-the-sunken-kingdom.md`. Copy the header from another file and change it. The filename becomes the web address,
 for example `/lore/aetherastra/the-sunken-kingdom`.
+
+### Time periods (Aeontides)
+
+A world can be split into time periods. Each period is a folder inside the world's folder, with a `_period.md`
+describing it and one file per section. On the site, the periods appear as a numbered timeline on the world's page.
+
+`_period.md` uses the same header as other files, plus `era` (the small line above the title, e.g. `The First Aeontide`).
+The world's `_world.md` sets what the periods are called with `periods: Aeontides`.
+
+To add a section to a period, create a file in that period's folder (e.g. `content/lore/aetherastra/3-the-age-of-sovereignty/01-the-first-kingdoms.md`).
+It appears on the period's page straight away and becomes readable once it has text.
 
 ### Adding or naming a world
 

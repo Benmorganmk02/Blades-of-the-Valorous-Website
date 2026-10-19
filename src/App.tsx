@@ -18,6 +18,7 @@ export default function App() {
         <Route path="lore" element={<Lore />} />
         <Route path="lore/:world" element={<LoreWorld />} />
         <Route path="lore/:world/:chapter" element={<LoreChapter />} />
+        <Route path="lore/:world/:chapter/:section" element={<LoreChapter />} />
         <Route path="character-sheets" element={<CharacterSheets />} />
         <Route path="builder" element={<Builder />} />
         <Route path="*" element={<NotFound />} />

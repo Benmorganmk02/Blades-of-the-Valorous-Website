@@ -1,9 +1,9 @@
-import { BookOpen, Castle, Crown, Flame, Globe2, Hourglass, Map, Moon, Scroll, Shield, Skull, Sparkles, Swords, Users, type LucideIcon } from 'lucide-react';
+import { BookOpen, Castle, Crown, Flame, Globe2, Hourglass, Map, Moon, Scroll, Shield, Skull, Sparkles, Star, Swords, Users, type LucideIcon } from 'lucide-react';
 
 // Names usable in a lore file's "icon:" line.
 const ICONS: Record<string, LucideIcon> = {
   globe: Globe2, users: Users, crown: Crown, hourglass: Hourglass, book: BookOpen, castle: Castle,
-  flame: Flame, map: Map, moon: Moon, scroll: Scroll, shield: Shield, skull: Skull, sparkles: Sparkles, swords: Swords,
+  flame: Flame, map: Map, moon: Moon, scroll: Scroll, shield: Shield, skull: Skull, sparkles: Sparkles, star: Star, swords: Swords,
 };
 
 export default function LoreIcon({ name, size = 30 }: { name: string; size?: number }) {
