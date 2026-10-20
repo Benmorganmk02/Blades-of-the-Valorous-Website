@@ -1,5 +1,5 @@
 ---
-title: Background 8
+title: Soldier
 order: 8
 archetypes: all
 races: all
