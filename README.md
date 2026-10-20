@@ -107,11 +107,24 @@ Modules live in `content/modules/`. A short module can be one file; a bigger one
 ```
 content/modules/the-hunters-of-the-north/
   _module.md                          ← title, summary, world, subsection, …
-  01-player-character-archetypes.md   ← a sub-category, shown as a card on the module's page
+  01-player-character-archetypes/     ← a sub-category, shown as a card on the module's page
 ```
 
 To add a sub-category, create a new file in the module's folder (copy the header from an existing one).
 It shows as "Coming soon" until it has text.
+
+**Lists inside a sub-category** (e.g. one card per archetype): make the sub-category a folder with a `_part.md`
+(its title and summary) and one file per item. Player Character Archetypes already works this way:
+
+```
+content/modules/the-hunters-of-the-north/01-player-character-archetypes/
+  _part.md                  ← the sub-category's title and summary
+  _archetype-template.md    ← copy this to add an archetype (not shown on the site)
+  01-the-wolf-tracker.md    ← one file per archetype
+```
+
+Each item can have an optional `tags:` line (e.g. `tags: Ranged, Tracker`) shown as small labels on its card.
+An item with text below its header gets its own page; one with only a header is listed as "Coming soon".
 
 For a single-file module, open `content/modules/_template.md`, copy its contents into
 a new file (e.g. `the-sunken-crown.md`) and fill it in. Apart from `_module.md`, files whose names start with `_` are never shown on the site.
