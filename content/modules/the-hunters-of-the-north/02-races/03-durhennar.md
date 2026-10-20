@@ -3,5 +3,5 @@ title: Dúrhennar
 order: 3
 tags: Dwarf
 summary: Dwarves.
-archetypes: all
+archetypes: Soldier, Inquisitor, Caster
 ---
