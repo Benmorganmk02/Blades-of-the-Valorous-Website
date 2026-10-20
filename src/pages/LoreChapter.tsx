@@ -2,8 +2,9 @@ import { Link, useParams } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import Markdown from '../components/Markdown';
 import EntryCard from '../components/EntryCard';
+import { ModulesHere } from '../components/ModuleCard';
 import NotFound from './NotFound';
-import { WORLDS, type Entry, type Period, type World } from '../content';
+import { WORLDS, modulesFor, type Entry, type Period, type World } from '../content';
 
 /** Previous / up / next links under a lore page. */
 function PageNav({ prev, next, up }: { prev?: [string, string]; next?: [string, string]; up: [string, string] }) {
@@ -48,6 +49,7 @@ function PeriodPage({ world, period }: { world: World; period: Period }) {
             <p className="font-display uppercase tracking-[0.2em] text-silver-300">The chronicle of this age is yet to be written</p>
           </div>
         )}
+        <ModulesHere modules={modulesFor(world.slug, period.slug)} title="Modules set in this age" />
       </div>
       <PageNav
         prev={prev && [`${base}/${prev.slug}`, prev.title]}

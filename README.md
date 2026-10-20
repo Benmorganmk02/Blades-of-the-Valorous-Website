@@ -11,6 +11,7 @@ All rules and lore live as plain text files in the **`content/`** folder:
 ```
 content/
   rules/                       ← one file per section of the Rules page
+  modules/                     ← one file per adventure module (copy _template.md)
   lore/
     aetherastra/               ← one folder per world
       _world.md                ← the world itself: name, tagline, intro
@@ -95,6 +96,25 @@ To change their web address too, rename the folder (GitHub: open `_world.md`, �
 | `[text](https://...)`    | a link                      |
 
 Tables use pipes. Copy one from an existing rules file and edit it.
+
+---
+
+## 🗺️ Adding a module
+
+Modules live in `content/modules/`, one file per adventure. Open `content/modules/_template.md`, copy its contents into
+a new file (e.g. `the-sunken-crown.md`) and fill it in. Files whose names start with `_` are never shown on the site.
+
+Two header lines connect a module to the lore:
+
+| Line         | What to put                                                                                              |
+| ------------ | -------------------------------------------------------------------------------------------------------- |
+| `world`      | The world's folder name: `aetherastra`, `malconia`, … Leave it out if the module fits any world.          |
+| `subsection` | Where in that world: a time period's folder name without its number (`the-age-of-sovereignty`), a section inside one (`the-age-of-myth/the-creation`), or a general chapter (`peoples`). |
+
+Optional lines: `level` (e.g. `1–3`), `players` (e.g. `3–5`), `length` (e.g. `One-shot`).
+
+A linked module shows up on the Modules page (filterable by world), on its world's Lore page, and on its time period's page.
+A module with no text below the header still gets a page that says "coming soon".
 
 ---
 

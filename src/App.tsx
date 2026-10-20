@@ -7,6 +7,8 @@ import LoreWorld from './pages/LoreWorld';
 import LoreChapter from './pages/LoreChapter';
 import CharacterSheets from './pages/CharacterSheets';
 import Builder from './pages/Builder';
+import Modules from './pages/Modules';
+import ModulePage from './pages/ModulePage';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -19,6 +21,8 @@ export default function App() {
         <Route path="lore/:world" element={<LoreWorld />} />
         <Route path="lore/:world/:chapter" element={<LoreChapter />} />
         <Route path="lore/:world/:chapter/:section" element={<LoreChapter />} />
+        <Route path="modules" element={<Modules />} />
+        <Route path="modules/:module" element={<ModulePage />} />
         <Route path="character-sheets" element={<CharacterSheets />} />
         <Route path="builder" element={<Builder />} />
         <Route path="*" element={<NotFound />} />

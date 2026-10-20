@@ -22,18 +22,18 @@ export default function Layout() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link to="/" className="flex items-center gap-2.5">
             <Crest className="h-11 w-11" />
-            <span className="font-display text-base font-semibold uppercase tracking-[0.18em] text-silver-100 sm:text-lg">
+            <span className="font-display text-base font-semibold uppercase tracking-[0.18em] text-silver-100 sm:whitespace-nowrap sm:text-lg">
               Blades <span className="text-royal-300">of the</span> Valorous
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 xl:flex">
             {NAV_LINKS.map(l => (
               <NavLink
                 key={l.to}
                 to={l.to}
                 className={({ isActive }) =>
-                  `rounded-md px-3 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] transition ${
+                  `whitespace-nowrap rounded-md px-3 py-2 font-display text-xs font-semibold uppercase tracking-[0.16em] transition ${
                     isActive ? 'text-white bg-royal-600/40' : 'text-silver-300 hover:text-white hover:bg-white/5'
                   }`
                 }
@@ -44,7 +44,7 @@ export default function Layout() {
           </nav>
 
           <button
-            className="rounded-md p-2 text-silver-200 hover:bg-white/5 md:hidden"
+            className="rounded-md p-2 text-silver-200 hover:bg-white/5 xl:hidden"
             onClick={() => setOpen(o => !o)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
@@ -54,7 +54,7 @@ export default function Layout() {
         </div>
 
         {open && (
-          <nav className="border-t border-silver-500/15 px-4 pb-4 pt-2 md:hidden">
+          <nav className="border-t border-silver-500/15 px-4 pb-4 pt-2 xl:hidden">
             {NAV_LINKS.map(l => (
               <NavLink
                 key={l.to}

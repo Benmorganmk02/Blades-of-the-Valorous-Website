@@ -103,3 +103,67 @@ function loadWorlds(): World[] {
 }
 
 export const WORLDS = loadWorlds();
+
+// ── Modules ──────────────────────────────────────────────────────────────────
+// content/modules/<name>.md, one per adventure module. Files starting with "_"
+// (like _template.md) are ignored. A module can be tied to a world and to a
+// part of it with `world:` and `subsection:` — the subsection is a time period
+// ("the-age-of-sovereignty"), a section inside one ("the-age-of-myth/the-creation")
+// or a general chapter ("peoples").
+
+export interface ModuleSetting {
+  world: World;
+  /** The linked part of the world, if `subsection:` named one that exists. */
+  part?: { label: string; era: string; href: string; periodSlug?: string };
+}
+
+export interface Module extends Entry {
+  setting?: ModuleSetting;
+  level: string;
+  players: string;
+  length: string;
+}
+
+const moduleFiles = import.meta.glob('/content/modules/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+
+function resolveSetting(worldSlug: string, sub: string, file: string): ModuleSetting | undefined {
+  if (!worldSlug) return undefined;
+  const world = WORLDS.find(w => w.slug === worldSlug);
+  if (!world) {
+    console.warn(`[modules] ${file}: no world called "${worldSlug}"`);
+    return undefined;
+  }
+  if (!sub) return { world };
+  const base = `/lore/${world.slug}`;
+  const [first, second] = sub.split('/').map(s => s.trim());
+  const period = world.periods.find(p => p.slug === first);
+  if (period && second) {
+    const section = period.sections.find(s => s.slug === second);
+    if (section) return { world, part: { label: section.title, era: [period.era, period.title].filter(Boolean).join(' · '), href: `${base}/${period.slug}/${section.slug}`, periodSlug: period.slug } };
+  } else if (period) {
+    return { world, part: { label: period.title, era: period.era, href: `${base}/${period.slug}`, periodSlug: period.slug } };
+  } else {
+    const chapter = world.chapters.find(c => c.slug === first);
+    if (chapter) return { world, part: { label: chapter.title, era: '', href: `${base}/${chapter.slug}` } };
+  }
+  console.warn(`[modules] ${file}: "${sub}" isn't a part of ${world.title}`);
+  return { world };
+}
+
+export const MODULES: Module[] = Object.entries(moduleFiles)
+  .filter(([p]) => !p.split('/').pop()!.startsWith('_'))
+  .map(([p, raw]) => {
+    const e = parse(fileSlug(p), raw);
+    return {
+      ...e,
+      setting: resolveSetting(e.meta.world || '', e.meta.subsection || '', p),
+      level: e.meta.level || '',
+      players: e.meta.players || '',
+      length: e.meta.length || '',
+    };
+  })
+  .sort(byOrder);
+
+/** Modules set in a world, optionally narrowed to one time period. */
+export const modulesFor = (worldSlug: string, periodSlug?: string) =>
+  MODULES.filter(m => m.setting?.world.slug === worldSlug && (!periodSlug || m.setting.part?.periodSlug === periodSlug));

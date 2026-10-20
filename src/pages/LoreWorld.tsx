@@ -2,9 +2,10 @@ import { Link, useParams } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import LoreIcon from '../components/LoreIcon';
 import EntryCard from '../components/EntryCard';
+import { ModulesHere } from '../components/ModuleCard';
 import Markdown from '../components/Markdown';
 import NotFound from './NotFound';
-import { WORLDS } from '../content';
+import { WORLDS, modulesFor } from '../content';
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
 
@@ -72,6 +73,8 @@ export default function LoreWorld() {
             <p className="mt-4 font-display uppercase tracking-[0.2em] text-silver-300">This chronicle is yet to be written</p>
           </div>
         )}
+
+        <ModulesHere modules={modulesFor(world.slug)} title={`Modules set in ${world.title}`} />
 
         <p className="mt-10 text-center font-display text-sm uppercase tracking-[0.15em]">
           <Link to="/lore" className="text-silver-400 hover:text-white">← All Worlds</Link>

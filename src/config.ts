@@ -7,6 +7,7 @@ export const APP_URL = 'https://bot-f-generic-app.vercel.app';
 export const NAV_LINKS = [
   { to: '/rules', label: 'Rules' },
   { to: '/lore', label: 'Lore' },
+  { to: '/modules', label: 'Modules' },
   { to: '/character-sheets', label: 'Character Sheets' },
   { to: '/builder', label: 'Character Builder' },
 ] as const;

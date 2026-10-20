@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Feather, ScrollText, Hammer, Dices, Shield, Sparkles } from 'lucide-react';
+import { BookOpen, Feather, ScrollText, Hammer, Dices, Shield, Sparkles, Compass } from 'lucide-react';
 import Crest from '../components/Crest';
 import ElementalAura from '../components/ElementalAura';
 
 const SECTIONS = [
   { to: '/rules', icon: BookOpen, title: 'Rules', text: 'Dice pools, attributes, armor and the injury ladder. The full reference for players and game masters.' },
   { to: '/lore', icon: Feather, title: 'Lore', text: 'Explore the worlds of the game, starting with Aetherastra, whose story runs from the age of blades to the age of stars.' },
+  { to: '/modules', icon: Compass, title: 'Modules', text: 'Ready-to-run adventures, each set in a world and an age of its history.' },
   { to: '/character-sheets', icon: ScrollText, title: 'Character Sheets', text: 'Everything a hero carries, from stats and skills to gear, wounds and loadouts.' },
   { to: '/builder', icon: Hammer, title: 'Character Builder', text: 'Forge a new character step by step, from first point spent to first blade drawn.' },
 ];
@@ -64,11 +65,11 @@ export default function Home() {
           <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">Enter the Hall</h2>
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          {SECTIONS.map(s => (
+          {SECTIONS.map((s, i) => (
             <Link
               key={s.to}
               to={s.to}
-              className="panel group flex gap-5 p-7 transition hover:border-royal-400/60 hover:shadow-glow"
+              className={`${i === SECTIONS.length - 1 && SECTIONS.length % 2 ? 'sm:col-span-2 ' : ''}panel group flex gap-5 p-7 transition hover:border-royal-400/60 hover:shadow-glow`}
             >
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-royal-400/40 bg-royal-700/40">
                 <s.icon className="text-silver-100" size={24} strokeWidth={1.5} />
