@@ -1,5 +1,5 @@
 ---
-title: Background 9
+title: Mercenary
 order: 9
 archetypes: all
 races: all
