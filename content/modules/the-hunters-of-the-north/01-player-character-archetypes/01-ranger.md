@@ -1,5 +1,5 @@
 ---
 title: Ranger
 order: 1
-races: all
+races: Aeltheran, canideran, half-elurai, felineran
 ---
