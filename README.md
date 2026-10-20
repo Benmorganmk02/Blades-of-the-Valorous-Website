@@ -101,8 +101,20 @@ Tables use pipes. Copy one from an existing rules file and edit it.
 
 ## 🗺️ Adding a module
 
-Modules live in `content/modules/`, one file per adventure. Open `content/modules/_template.md`, copy its contents into
-a new file (e.g. `the-sunken-crown.md`) and fill it in. Files whose names start with `_` are never shown on the site.
+Modules live in `content/modules/`. A short module can be one file; a bigger one is a folder with a `_module.md`
+(the module's header and intro) plus one file per sub-category, for example:
+
+```
+content/modules/the-hunters-of-the-north/
+  _module.md                          ← title, summary, world, subsection, …
+  01-player-character-archetypes.md   ← a sub-category, shown as a card on the module's page
+```
+
+To add a sub-category, create a new file in the module's folder (copy the header from an existing one).
+It shows as "Coming soon" until it has text.
+
+For a single-file module, open `content/modules/_template.md`, copy its contents into
+a new file (e.g. `the-sunken-crown.md`) and fill it in. Apart from `_module.md`, files whose names start with `_` are never shown on the site.
 
 Two header lines connect a module to the lore:
 

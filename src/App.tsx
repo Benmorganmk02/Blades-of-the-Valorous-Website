@@ -23,6 +23,7 @@ export default function App() {
         <Route path="lore/:world/:chapter/:section" element={<LoreChapter />} />
         <Route path="modules" element={<Modules />} />
         <Route path="modules/:module" element={<ModulePage />} />
+        <Route path="modules/:module/:part" element={<ModulePage />} />
         <Route path="character-sheets" element={<CharacterSheets />} />
         <Route path="builder" element={<Builder />} />
         <Route path="*" element={<NotFound />} />

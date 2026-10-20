@@ -39,7 +39,7 @@ export default function ModuleCard({ m }: { m: Module }) {
       {m.summary && <p className="mt-2 flex-1 text-silver-300">{m.summary}</p>}
       {facts && <p className="mt-4 text-sm text-silver-400">{facts}</p>}
       <span className="mt-4 inline-block font-display text-xs uppercase tracking-[0.2em] text-royal-300">
-        {m.body ? 'Open module →' : 'Details →'}
+        {m.body || m.parts.some(p => p.body) ? 'Open module →' : 'Details →'}
       </span>
     </Link>
   );

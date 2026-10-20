@@ -105,8 +105,10 @@ function loadWorlds(): World[] {
 export const WORLDS = loadWorlds();
 
 // ── Modules ──────────────────────────────────────────────────────────────────
-// content/modules/<name>.md, one per adventure module. Files starting with "_"
-// (like _template.md) are ignored. A module can be tied to a world and to a
+// One per adventure module: either a single file content/modules/<name>.md, or a
+// folder content/modules/<name>/ with a _module.md (the module's own header and
+// intro) plus one file per sub-category (e.g. player character archetypes).
+// Files starting with "_" (like _template.md) are otherwise ignored. A module can be tied to a world and to a
 // part of it with `world:` and `subsection:` — the subsection is a time period
 // ("the-age-of-sovereignty"), a section inside one ("the-age-of-myth/the-creation")
 // or a general chapter ("peoples").
@@ -119,12 +121,14 @@ export interface ModuleSetting {
 
 export interface Module extends Entry {
   setting?: ModuleSetting;
+  /** Sub-categories, for modules that are folders. */
+  parts: Entry[];
   level: string;
   players: string;
   length: string;
 }
 
-const moduleFiles = import.meta.glob('/content/modules/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const moduleFiles = import.meta.glob(['/content/modules/*.md', '/content/modules/*/*.md'], { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 
 function resolveSetting(worldSlug: string, sub: string, file: string): ModuleSetting | undefined {
   if (!worldSlug) return undefined;
@@ -150,19 +154,38 @@ function resolveSetting(worldSlug: string, sub: string, file: string): ModuleSet
   return { world };
 }
 
-export const MODULES: Module[] = Object.entries(moduleFiles)
-  .filter(([p]) => !p.split('/').pop()!.startsWith('_'))
-  .map(([p, raw]) => {
-    const e = parse(fileSlug(p), raw);
-    return {
-      ...e,
-      setting: resolveSetting(e.meta.world || '', e.meta.subsection || '', p),
-      level: e.meta.level || '',
-      players: e.meta.players || '',
-      length: e.meta.length || '',
-    };
-  })
-  .sort(byOrder);
+function loadModules(): Module[] {
+  const drafts = new Map<string, { info?: Entry; file: string; parts: Entry[] }>();
+  for (const [path, raw] of Object.entries(moduleFiles)) {
+    const parts = path.split('/').slice(3); // drop "", "content", "modules"
+    if (parts.length === 1) {
+      if (parts[0].startsWith('_')) continue;
+      const slug = fileSlug(path);
+      drafts.set(slug, { info: parse(slug, raw), file: path, parts: [] });
+    } else {
+      const slug = slugOf(parts[0]);
+      const d = drafts.get(slug) ?? { file: path, parts: [] };
+      drafts.set(slug, d);
+      if (parts[1] === '_module.md') { d.info = parse(slug, raw); d.file = path; }
+      else if (!parts[1].startsWith('_')) d.parts.push(parse(fileSlug(path), raw));
+    }
+  }
+  return [...drafts.entries()]
+    .map(([slug, d]) => {
+      const e = d.info ?? parse(slug, '');
+      return {
+        ...e,
+        setting: resolveSetting(e.meta.world || '', e.meta.subsection || '', d.file),
+        parts: d.parts.sort(byOrder),
+        level: e.meta.level || '',
+        players: e.meta.players || '',
+        length: e.meta.length || '',
+      };
+    })
+    .sort(byOrder);
+}
+
+export const MODULES = loadModules();
 
 /** Modules set in a world, optionally narrowed to one time period. */
 export const modulesFor = (worldSlug: string, periodSlug?: string) =>
