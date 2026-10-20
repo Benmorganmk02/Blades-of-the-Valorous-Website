@@ -1,5 +1,5 @@
 ---
 title: Rogue
 order: 2
-races: all
+races: aeltheran, canideran, half-elurai, felineran
 ---
