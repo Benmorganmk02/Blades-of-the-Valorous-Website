@@ -1,6 +1,6 @@
 ---
-title: Background 2
+title: Criminal
 order: 2
-archetypes: all
+archetypes: 
 races: all
 ---
