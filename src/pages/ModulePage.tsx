@@ -3,6 +3,7 @@ import PageHeader from '../components/PageHeader';
 import Markdown from '../components/Markdown';
 import EntryCard from '../components/EntryCard';
 import { SettingTags, moduleFacts } from '../components/ModuleCard';
+import PresetPicker from '../components/PresetPicker';
 import NotFound from './NotFound';
 import { MODULES, type Module, type ModulePart, type Entry } from '../content';
 
@@ -37,7 +38,9 @@ function PartPage({ m, part }: { m: Module; part: ModulePart }) {
             <Markdown>{part.body}</Markdown>
           </article>
         )}
-        {part.items.length > 0 && (
+        {part.meta.picker ? (
+          <PresetPicker m={m} part={part} />
+        ) : part.items.length > 0 && (
           <div className="grid gap-6 sm:grid-cols-2">
             {part.items.map(it => <EntryCard key={it.slug} entry={it} to={`${base}/${part.slug}/${it.slug}`} icon={!!it.icon} />)}
           </div>

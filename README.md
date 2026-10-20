@@ -141,6 +141,31 @@ Optional lines: `level` (e.g. `1–3`), `players` (e.g. `3–5`), `length` (e.g.
 A linked module shows up on the Modules page (filterable by world), on its world's Lore page, and on its time period's page.
 A module with no text below the header still gets a page that says "coming soon".
 
+### The archetype picker (The Hunters of the North)
+
+On the module's **Player Character Archetypes** page, players pick an **archetype → race → background**.
+Each of those is one file:
+
+```
+content/modules/the-hunters-of-the-north/
+  01-player-character-archetypes/   ← Ranger, Rogue, Soldier, Inquisitor, Caster, Druid
+  02-races/                         ← Aeltheran, Canideran, Dúrhennar, Half-Elurai, Felineran
+  03-backgrounds/                   ← Background 1–12 (rename and fill these in)
+```
+
+**Who can take what** is set by lines in each file's header. `all` means no restriction.
+Names ignore capitals and accents, so `Durhennar` matches `Dúrhennar`.
+
+| File        | Line                                       | Meaning                                                    |
+| ----------- | ------------------------------------------ | ---------------------------------------------------------- |
+| Archetype   | `races: Aeltheran, Dúrhennar`               | Only these races are offered for this archetype            |
+| Race        | `archetypes: Ranger, Druid`                 | This race is only offered for these archetypes             |
+| Background  | `archetypes: Ranger, Rogue` + `races: all`  | Offered when the archetype **and** the race both match     |
+| Background  | `combos: Ranger + Canideran, Druid + any`   | Offered only for these exact pairs (replaces the two above) |
+
+To name a background, open e.g. `03-backgrounds/01-background-1.md`, change `title:`, add a `summary:`, and set who can take it.
+(The file name can stay as it is — only the `title` shows on the site.)
+
 ---
 
 ## Other settings
