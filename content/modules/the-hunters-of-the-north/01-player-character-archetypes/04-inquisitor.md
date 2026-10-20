@@ -1,5 +1,5 @@
 ---
 title: Inquisitor
 order: 4
-races: all
+races: aeltheran, canideran, durhennar, half-elurai
 ---
