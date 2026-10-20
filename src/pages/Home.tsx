@@ -7,7 +7,7 @@ const SECTIONS = [
   { to: '/rules', icon: BookOpen, title: 'Rules', text: 'Dice pools, attributes, armor and the injury ladder. The full reference for players and game masters.' },
   { to: '/lore', icon: Feather, title: 'Lore', text: 'Explore the worlds of the game, starting with Aetherastra, whose story runs from the age of blades to the age of stars.' },
   { to: '/modules', icon: Compass, title: 'Modules', text: 'Ready-to-run adventures, each set in a world and an age of its history.' },
-  { to: '/character-sheets', icon: ScrollText, title: 'Character Sheets', text: 'Everything a hero carries, from stats and skills to gear, wounds and loadouts.' },
+  { to: '/character-sheets', icon: ScrollText, title: 'Character Sheets', text: 'Download the printable sheet: stats and skills, armor and wounds, gear and loadouts, all on one page.' },
   { to: '/builder', icon: Hammer, title: 'Character Builder', text: 'Forge a new character step by step, from first point spent to first blade drawn.' },
 ];
 

@@ -170,6 +170,10 @@ To name a background, open e.g. `03-backgrounds/01-background-1.md`, change `tit
 
 ## Other settings
 
+- **Character sheet PDF:** to publish a new version, upload it to `public/downloads/` named exactly
+  `blades-of-the-valorous-character-sheet.pdf` (GitHub: open the folder → **Add file → Upload files**; same name replaces the old one).
+  The preview picture on the Character Sheets page is `src/assets/character-sheet-preview.webp`. Ask Claude to regenerate it from the new PDF.
+
 - **Character app link:** set `APP_URL` in `src/config.ts`. Until it's set, the launch buttons say "Coming soon".
 - **Home, Character Sheets and Builder page text** lives in `src/pages/*.tsx`.
 

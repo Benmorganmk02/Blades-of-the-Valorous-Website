@@ -39,7 +39,12 @@ export default function Builder() {
 
         <div className="panel mt-10 flex flex-col items-center gap-5 p-10 text-center">
           <h2 className="text-2xl font-semibold sm:text-3xl">Begin Your Legend</h2>
+          <p className="max-w-xl text-silver-300">Sign in to build, save and roll from your characters online.</p>
           <LaunchButton label="Launch Character Builder" />
+          <p className="text-sm text-silver-400">
+            Prefer pen and paper? Download the{' '}
+            <Link to="/character-sheets" className="text-royal-300 underline-offset-4 hover:underline">printable character sheet</Link>.
+          </p>
         </div>
       </div>
     </>
