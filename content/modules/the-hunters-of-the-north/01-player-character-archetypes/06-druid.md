@@ -1,5 +1,5 @@
 ---
 title: Druid
 order: 6
-races: all
+races: aeltheran, canideran, half-elurai, felineran
 ---
