@@ -1,6 +1,6 @@
 ---
-title: Background 1
+title: Noble
 order: 1
-archetypes: all
-races: all
+archetypes: Ranger, Soldier, Inquisitor, Caster
+races: Aeltheran
 ---
