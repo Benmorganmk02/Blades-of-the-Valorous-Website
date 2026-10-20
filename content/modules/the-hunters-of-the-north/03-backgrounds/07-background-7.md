@@ -1,5 +1,5 @@
 ---
-title: Background 7
+title: Hermit
 order: 7
 archetypes: all
 races: all
