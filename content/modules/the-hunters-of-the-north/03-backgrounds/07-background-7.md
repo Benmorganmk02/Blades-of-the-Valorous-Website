@@ -1,6 +1,6 @@
 ---
 title: Hermit
 order: 7
-archetypes: Ranger, Druid
+archetypes: Ranger, Druid, soldier
 races: all
 ---
