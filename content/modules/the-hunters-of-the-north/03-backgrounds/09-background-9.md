@@ -1,6 +1,6 @@
 ---
 title: Mercenary
 order: 9
-archetypes: all
+archetypes: caster, soldier, rogue
 races: all
 ---
