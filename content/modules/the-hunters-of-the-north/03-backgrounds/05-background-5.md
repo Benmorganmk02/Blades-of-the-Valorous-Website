@@ -1,6 +1,6 @@
 ---
-title: Village
+title: merchant
 order: 5
-archetypes: all
-races: all
+archetypes: soldier, caster, rogue
+races: aeltheran, canideran, felineran, durhennnar
 ---
