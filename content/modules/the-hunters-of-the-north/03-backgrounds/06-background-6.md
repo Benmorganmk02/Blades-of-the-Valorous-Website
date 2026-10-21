@@ -1,6 +1,6 @@
 ---
 title: City
 order: 6
-archetypes: all
+archetypes: rogue, caster, soldier, inquisitor
 races: all
 ---
