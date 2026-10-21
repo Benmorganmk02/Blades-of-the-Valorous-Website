@@ -1,6 +1,6 @@
 ---
 title: Religious Acolyte
 order: 3
-archetypes: all
-races: all
+archetypes: Caster, inquisitor
+races: aeltheran, half-elurai, durhennar
 ---
