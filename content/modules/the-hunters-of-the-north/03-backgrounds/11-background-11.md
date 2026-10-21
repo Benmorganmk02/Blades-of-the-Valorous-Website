@@ -1,6 +1,6 @@
 ---
 title: Scholar
 order: 11
-archetypes: all
+archetypes: caster, inquisitor
 races: all
 ---
