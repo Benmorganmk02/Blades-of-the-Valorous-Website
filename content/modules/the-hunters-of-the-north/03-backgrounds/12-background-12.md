@@ -1,6 +1,6 @@
 ---
-title: Background 12
+title: Wanderer
 order: 12
-archetypes: all
+archetypes: caster, druid, ranger, rogue
 races: all
 ---
