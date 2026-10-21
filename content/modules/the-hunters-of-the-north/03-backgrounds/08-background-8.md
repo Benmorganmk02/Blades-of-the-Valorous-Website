@@ -1,6 +1,6 @@
 ---
 title: Military
 order: 8
-archetypes: all
-races: all
+archetypes: soldier, ranger, inquisitor, caster
+races: felineran, durhennar, canideran, aeltheran
 ---
