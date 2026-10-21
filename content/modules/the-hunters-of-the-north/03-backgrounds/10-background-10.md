@@ -1,6 +1,6 @@
 ---
 title: Guard
 order: 10
-archetypes: all
-races: all
+archetypes: soldier, caster, 
+races: aeltheran, canideran, felineran
 ---
