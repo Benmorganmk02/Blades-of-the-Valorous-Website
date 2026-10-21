@@ -1,6 +1,6 @@
 ---
-title: Merchant
+title: Village
 order: 4
-archetypes: all
-races: all
+archetypes: Ranger, Soldier, caster
+races: aeltheran, canideran, felineran
 ---
